@@ -49,7 +49,14 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true, userId: user.id });
   } catch (error) {
-    console.error('Registration error:', error);
+    const err = error as Error;
+    console.error('Registration error:', err?.message ?? error);
+    if (process.env.NODE_ENV === 'development') {
+      return NextResponse.json(
+        { error: 'Registration failed', detail: err?.message },
+        { status: 500 }
+      );
+    }
     return NextResponse.json({ error: 'Registration failed' }, { status: 500 });
   }
 }

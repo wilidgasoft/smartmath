@@ -58,7 +58,7 @@ services:
         condition: service_healthy
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER:-smartmath}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-smartmath}
-    command: npx prisma migrate deploy
+    command: npx prisma db push
     networks:
       - smartmath-net
     profiles:
