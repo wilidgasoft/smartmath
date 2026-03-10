@@ -32,14 +32,15 @@ services:
         condition: service_healthy
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER:-smartmath}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-smartmath}
-      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3002}
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-https://smartmath.valibay.com}
       NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:?Set NEXTAUTH_SECRET in .env}
+      AUTH_TRUST_HOST: "true"
       SMTP_HOST: ${SMTP_HOST:-}
       SMTP_PORT: ${SMTP_PORT:-587}
       SMTP_USER: ${SMTP_USER:-}
       SMTP_PASSWORD: ${SMTP_PASSWORD:-}
       SMTP_FROM: ${SMTP_FROM:-noreply@smartmath.app}
-      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3002}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-https://smartmath.valibay.com}
       NEXT_PUBLIC_DEFAULT_LOCALE: ${NEXT_PUBLIC_DEFAULT_LOCALE:-en}
     ports:
       - "127.0.0.1:3002:3000"  # 3002 host (3000=PolicyPal, 8081=Affiliate Nginx)
@@ -64,7 +65,7 @@ services:
     profiles:
       - migrate
 
-  # ── Cloudflare Tunnel ──
+  # ── Cloudflare Tunnel (optional; use nginx instead) ──
   tunnel:
     image: cloudflare/cloudflared:latest
     container_name: smartmath-tunnel
@@ -73,9 +74,11 @@ services:
       - app
     command: tunnel --no-autoupdate run
     environment:
-      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN:?Set CLOUDFLARE_TUNNEL_TOKEN in .env}
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN:-}
     networks:
       - smartmath-net
+    profiles:
+      - tunnel
 
 volumes:
   postgres_data:
