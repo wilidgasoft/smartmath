@@ -1,7 +1,7 @@
 services:
   db:
     ports:
-      - "127.0.0.1:5433:5432"
+      - "127.0.0.1:5436:5432"  # 5436 host (5433=PolicyPal, 5435=SmartMath prod)
     environment:
       POSTGRES_PASSWORD: devpassword
 
@@ -14,12 +14,12 @@ services:
       - /app/.next
     command: npm run dev
     ports:
-      - "3001:3000"
+      - "3003:3000"  # 3003 host (3000=PolicyPal, 3002=SmartMath prod)
     environment:
       NODE_ENV: development
       DATABASE_URL: postgresql://smartmath:devpassword@db:5432/smartmath
-      NEXTAUTH_URL: http://localhost:3001
-      NEXT_PUBLIC_APP_URL: http://localhost:3001
+      NEXTAUTH_URL: http://localhost:3003
+      NEXT_PUBLIC_APP_URL: http://localhost:3003
 
   tunnel:
     profiles:
