@@ -109,6 +109,17 @@ function GameScreen({
   const [wrongAnimation, setWrongAnimation] = useState(false);
   const [problemStartTime, setProblemStartTime] = useState(Date.now());
 
+  // Reset all local state when navigating to a different level (e.g. clicking Next)
+  useEffect(() => {
+    resultComputedRef.current = false;
+    setResult(null);
+    setFeedback(null);
+    setSelectedAnswer(null);
+    setHintContent(null);
+    setWrongAnimation(false);
+    resetTimer();
+  }, [operation, levelNumber]); // eslint-disable-line react-hooks/exhaustive-deps
+
   // Start timer on first problem
   useEffect(() => {
     if (gameState === 'playing') {
