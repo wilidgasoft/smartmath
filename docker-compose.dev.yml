@@ -1,0 +1,26 @@
+services:
+  db:
+    ports:
+      - "127.0.0.1:5433:5432"
+    environment:
+      POSTGRES_PASSWORD: devpassword
+
+  app:
+    build:
+      target: deps
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    command: npm run dev
+    ports:
+      - "3001:3000"
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://smartmath:devpassword@db:5432/smartmath
+      NEXTAUTH_URL: http://localhost:3001
+      NEXT_PUBLIC_APP_URL: http://localhost:3001
+
+  tunnel:
+    profiles:
+      - tunnel

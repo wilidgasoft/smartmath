@@ -1,0 +1,55 @@
+# ── Dependencies ──
+node_modules/
+.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# ── Next.js build output ──
+.next/
+out/
+build/
+
+# ── Environment variables (NEVER commit secrets) ──
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ── Prisma generated client (regenerated on install) ──
+node_modules/.prisma/
+node_modules/@prisma/
+
+# ── Testing ──
+coverage/
+.vitest/
+
+# ── OS ──
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+desktop.ini
+
+# ── IDE ──
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Logs ──
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ── Docker volumes / local data ──
+postgres_data/
+
+# ── Misc ──
+.vercel
+*.tsbuildinfo
+next-env.d.ts
