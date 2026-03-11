@@ -7,11 +7,11 @@ Each file should be a short MP3 (< 100KB for effects, < 5MB for music).
 
 | File | Duration | Description |
 |------|----------|-------------|
-| `correct.mp3` | ~0.5s | Bright positive chime, happy tone |
-| `wrong.mp3` | ~0.5s | Soft "whoops" — gentle, not punitive |
-| `launch.mp3` | ~1.5s | Rocket ignition whoosh |
-| `landing.mp3` | ~2s | Satisfying thud + spacey fanfare |
-| `click.mp3` | ~0.1s | Soft UI tap sound |
+--| `correct.mp3` | ~0.5s | Bright positive chime, happy tone |
+--| `wrong.mp3` | ~0.5s | Soft "whoops" — gentle, not punitive |
+--| `launch.mp3` | ~1.5s | Rocket ignition whoosh |
+--| `landing.mp3` | ~2s | Satisfying thud + spacey fanfare |
+--| `click.mp3` | ~0.1s | Soft UI tap sound |
 | `streak-3.mp3` | ~0.8s | Ascending chimes × 3 |
 | `streak-5.mp3` | ~1s | Turbo whoosh with bells |
 | `streak-10.mp3` | ~1.5s | Epic fanfare burst |

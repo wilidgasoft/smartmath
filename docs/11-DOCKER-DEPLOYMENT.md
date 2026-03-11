@@ -880,7 +880,7 @@ echo "=== Backup complete ==="
 ```bash
 # Restore from backup
 gunzip -c backups/smartmath_20260309_030000.sql.gz | \
-  docker compose exec -T db psql -U smartmath smartmath
+  sudo docker compose exec -T db psql -U smartmath smartmath
 ```
 
 ## 11. Development Workflow

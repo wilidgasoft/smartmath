@@ -16,16 +16,19 @@ describe('generateAddition', () => {
     }
   });
 
-  it('produces correct answers at level 1', () => {
+  it('produces correct answers at level 1 (random order)', () => {
     const problems = generateAddition(1);
-    expect(problems[0].correctAnswer).toBe(2); // 1+1
-    expect(problems[19].correctAnswer).toBe(21); // 1+20
+    const answers = problems.map((p) => p.correctAnswer).sort((a, b) => a - b);
+    expect(answers[0]).toBe(2); // 1+1
+    expect(answers[19]).toBe(21); // 1+20
+    expect(answers).toHaveLength(20);
   });
 
-  it('produces correct answers at level 10', () => {
+  it('produces correct answers at level 10 (random order)', () => {
     const problems = generateAddition(10);
-    expect(problems[0].correctAnswer).toBe(11); // 10+1
-    expect(problems[19].correctAnswer).toBe(30); // 10+20
+    const answers = problems.map((p) => p.correctAnswer).sort((a, b) => a - b);
+    expect(answers[0]).toBe(11); // 10+1
+    expect(answers[19]).toBe(30); // 10+20
   });
 
   it('all answers are non-negative', () => {
@@ -62,17 +65,17 @@ describe('generateSubtraction', () => {
     }
   });
 
-  it('level 1 starts with 1-1=0', () => {
+  it('level 1 includes 1-1=0 (random order)', () => {
     const problems = generateSubtraction(1);
-    expect(problems[0].operand1).toBe(1);
-    expect(problems[0].operand2).toBe(1);
-    expect(problems[0].correctAnswer).toBe(0);
+    const zeroProblem = problems.find((p) => p.operand1 === 1 && p.operand2 === 1 && p.correctAnswer === 0);
+    expect(zeroProblem).toBeDefined();
   });
 
-  it('level 5 starts with 5-5=0', () => {
+  it('level 5 includes results 0-19 (random order)', () => {
     const problems = generateSubtraction(5);
-    expect(problems[0].correctAnswer).toBe(0);
-    expect(problems[19].correctAnswer).toBe(19);
+    const answers = problems.map((p) => p.correctAnswer).sort((a, b) => a - b);
+    expect(answers[0]).toBe(0);
+    expect(answers[19]).toBe(19);
   });
 });
 
@@ -83,17 +86,17 @@ describe('generateMultiplication', () => {
     }
   });
 
-  it('level 5 answers are 5×1 through 5×20', () => {
+  it('level 5 answers are 5×1 through 5×20 (random order)', () => {
     const problems = generateMultiplication(5);
-    expect(problems[0].correctAnswer).toBe(5);
-    expect(problems[19].correctAnswer).toBe(100);
+    const answers = problems.map((p) => p.correctAnswer).sort((a, b) => a - b);
+    expect(answers[0]).toBe(5);
+    expect(answers[19]).toBe(100);
   });
 
-  it('level 1 all answers equal the operand2', () => {
+  it('level 1 all answers 1-20 (random order)', () => {
     const problems = generateMultiplication(1);
-    problems.forEach((p, i) => {
-      expect(p.correctAnswer).toBe(i + 1);
-    });
+    const answers = problems.map((p) => p.correctAnswer).sort((a, b) => a - b);
+    expect(answers).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]);
   });
 });
 
@@ -121,12 +124,12 @@ describe('generateDivision', () => {
     }
   });
 
-  it('level 10: 10÷10=1, 200÷10=20', () => {
+  it('level 10 includes 10÷10=1 and 200÷10=20 (random order)', () => {
     const problems = generateDivision(10);
-    expect(problems[0].operand1).toBe(10);
-    expect(problems[0].correctAnswer).toBe(1);
-    expect(problems[19].operand1).toBe(200);
-    expect(problems[19].correctAnswer).toBe(20);
+    const oneProblem = problems.find((p) => p.operand1 === 10 && p.correctAnswer === 1);
+    const twentyProblem = problems.find((p) => p.operand1 === 200 && p.correctAnswer === 20);
+    expect(oneProblem).toBeDefined();
+    expect(twentyProblem).toBeDefined();
   });
 });
 
